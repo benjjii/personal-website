@@ -1,0 +1,48 @@
+{
+  "technical": [
+    {
+      "title": "Designing Reliable Queue Workers",
+      "date": "2026-03-03",
+      "summary": "A practical checklist for idempotency, retry policies, and dead-letter handling in production worker systems.",
+      "url": "#",
+      "tags": ["Backend", "Reliability"]
+    },
+    {
+      "title": "API Contracts That Scale Across Teams",
+      "date": "2026-02-12",
+      "summary": "How contract-first API design reduces integration bugs and improves developer velocity in larger organizations.",
+      "url": "#",
+      "tags": ["Architecture", "API Design"]
+    },
+    {
+      "title": "A Maintainable Frontend Folder Structure",
+      "date": "2026-01-20",
+      "summary": "A lightweight structure for React apps that keeps domain logic clear as product complexity grows.",
+      "url": "#",
+      "tags": ["Frontend", "DX"]
+    }
+  ],
+  "personal": [
+    {
+      "title": "What Running Teaches Me About Engineering",
+      "date": "2026-03-22",
+      "summary": "Consistency compounds. A short note about patience, systems, and long-term thinking.",
+      "url": "#",
+      "tags": ["Personal", "Habits"]
+    },
+    {
+      "title": "On Slowing Down To Learn Faster",
+      "date": "2026-02-28",
+      "summary": "Why fewer projects with deeper reflection can outperform frantic context switching.",
+      "url": "#",
+      "tags": ["Learning", "Mindset"]
+    },
+    {
+      "title": "A Weekend Photography Walk",
+      "date": "2026-01-30",
+      "summary": "Notes from a calm day with no agenda except noticing details and following good light.",
+      "url": "#",
+      "tags": ["Photography", "Life"]
+    }
+  ]
+}

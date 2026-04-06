@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Personal website with portfolio projects, technical writing, and a flip-page personal blog."
+    />
+    <title>Personal Website | Portfolio + Blog</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <main class="face face--portfolio" id="portfolioFace">
+        <header class="site-header">
+          <a class="brand" href="#top">your-name.dev</a>
+          <nav class="main-nav" aria-label="Primary">
+            <a href="#projects">Projects</a>
+            <a href="#technical-writing">Writing</a>
+            <a href="#interests">Interests</a>
+            <a href="#contact">Contact</a>
+          </nav>
+        </header>
+
+        <section class="hero section" id="top">
+          <p class="eyebrow">Software Engineer</p>
+          <h1>Building thoughtful products and writing what I learn.</h1>
+          <p class="lede">
+            I design and build web products, share technical writeups, and stay
+            curious across engineering, design, and everyday life.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn--primary" href="#projects">View projects</a>
+            <a class="btn btn--ghost" href="#technical-writing">Read technical blogs</a>
+          </div>
+        </section>
+
+        <section class="section" id="about">
+          <div class="section-heading">
+            <p class="eyebrow">About</p>
+            <h2>What I focus on</h2>
+          </div>
+          <p class="body-copy">
+            I enjoy building practical systems, clean product experiences, and
+            useful tools that help people move faster with confidence. Most of
+            my work lives at the intersection of backend reliability, frontend
+            usability, and developer experience.
+          </p>
+        </section>
+
+        <section class="section" id="projects">
+          <div class="section-heading">
+            <p class="eyebrow">Selected work</p>
+            <h2>Projects I have built</h2>
+          </div>
+          <div class="card-grid">
+            <article class="card">
+              <h3>Deploy Dashboard</h3>
+              <p>
+                A release command center that visualizes deployments, health
+                checks, and rollback actions in one place.
+              </p>
+              <ul class="tags">
+                <li>TypeScript</li>
+                <li>Node.js</li>
+                <li>PostgreSQL</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Docs Search Assistant</h3>
+              <p>
+                A semantic documentation search tool that helps developers find
+                accurate implementation snippets in seconds.
+              </p>
+              <ul class="tags">
+                <li>Python</li>
+                <li>Embeddings</li>
+                <li>FastAPI</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Realtime Analytics Studio</h3>
+              <p>
+                A lightweight analytics platform for product teams to track
+                events, funnel drops, and retention trends.
+              </p>
+              <ul class="tags">
+                <li>React</li>
+                <li>Redis</li>
+                <li>Docker</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="technical-writing">
+          <div class="section-heading">
+            <p class="eyebrow">Technical blog</p>
+            <h2>Recent technical writing</h2>
+          </div>
+          <div class="post-list" id="technicalPosts"></div>
+        </section>
+
+        <section class="section" id="interests">
+          <div class="section-heading">
+            <p class="eyebrow">Outside work</p>
+            <h2>Interests</h2>
+          </div>
+          <div class="interest-grid">
+            <article>
+              <h3>Writing</h3>
+              <p>Long-form notes on software, focus, and learning systems.</p>
+            </article>
+            <article>
+              <h3>Running</h3>
+              <p>Building discipline one early morning at a time.</p>
+            </article>
+            <article>
+              <h3>Photography</h3>
+              <p>Capturing simple moments, mostly city streets and landscapes.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section section--flip-trigger" id="flipTrigger">
+          <p class="eyebrow">The other side</p>
+          <h2>Ready for the personal side?</h2>
+          <p>
+            Scroll reached the bottom. Flip the page to enter the personal blog
+            in light mode.
+          </p>
+          <button class="btn btn--primary" id="flipButton" type="button">
+            Flip the page
+          </button>
+        </section>
+
+        <footer class="site-footer section" id="contact">
+          <p class="eyebrow">Contact</p>
+          <h2>Let’s build something meaningful.</h2>
+          <p class="body-copy">
+            Email: <a href="mailto:hello@example.com">hello@example.com</a> ·
+            GitHub: <a href="https://github.com" target="_blank" rel="noreferrer">github.com/your-handle</a>
+          </p>
+        </footer>
+      </main>
+
+      <main class="face face--blog" id="blogFace" aria-hidden="true">
+        <header class="blog-header">
+          <p class="eyebrow">Personal Blog Mode</p>
+          <h2>The page has flipped.</h2>
+          <p>
+            This side is intentionally upside down and light mode. Add your own
+            personal posts anytime via
+            <code>content/blog-posts.json</code>.
+          </p>
+          <button class="btn btn--ghost-dark" id="returnButton" type="button">
+            Flip back to portfolio
+          </button>
+        </header>
+
+        <section class="section section--blog-posts">
+          <div class="section-heading">
+            <p class="eyebrow">Personal entries</p>
+            <h2>Notes beyond technical work</h2>
+          </div>
+          <div class="post-list post-list--blog" id="personalPosts"></div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
