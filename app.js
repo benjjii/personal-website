@@ -1,13 +1,7 @@
-const siteShell = document.querySelector(".site-shell");
-const portfolioFace = document.getElementById("portfolioFace");
-const blogFace = document.getElementById("blogFace");
-const flipButton = document.getElementById("flipButton");
-const returnButton = document.getElementById("returnButton");
 const technicalPostsContainer = document.getElementById("technicalPosts");
 const personalPostsContainer = document.getElementById("personalPosts");
-const flipTriggerSection = document.getElementById("flipTrigger");
-
-let canFlip = false;
+const themeToggle = document.getElementById("themeToggle");
+const personalBlogSection = document.getElementById("personalBlogSection");
 
 function formatDate(isoDate) {
   const parsedDate = new Date(`${isoDate}T00:00:00`);
@@ -23,12 +17,13 @@ function formatDate(isoDate) {
   });
 }
 
-function createPostCard(post) {
+function createPostCard(post, variant = "technical") {
   const article = document.createElement("article");
-  article.className = "post-item";
+  article.className = `post-item post-item--${variant}`;
 
   const safeUrl = post.url && post.url.trim().length > 0 ? post.url : "#";
   const tags = Array.isArray(post.tags) ? post.tags : [];
+  const titleText = post.title || "Untitled";
   const meta = document.createElement("p");
   meta.className = "post-item__meta";
   meta.textContent = `${formatDate(post.date)}${
@@ -36,18 +31,34 @@ function createPostCard(post) {
   }`;
 
   const title = document.createElement("h3");
-  title.textContent = post.title;
+  const titleLink = document.createElement("a");
+  titleLink.href = safeUrl;
+  titleLink.textContent = titleText;
+
+  if (safeUrl.startsWith("http")) {
+    titleLink.target = "_blank";
+    titleLink.rel = "noreferrer";
+  }
+
+  title.appendChild(titleLink);
 
   const summary = document.createElement("p");
   summary.textContent = post.summary;
 
   const link = document.createElement("a");
   link.href = safeUrl;
-  link.textContent = "Read post";
+  link.textContent = variant === "personal" ? "Open note" : "Read post";
 
   if (safeUrl.startsWith("http")) {
     link.target = "_blank";
     link.rel = "noreferrer";
+  }
+
+  if (variant === "personal") {
+    const brand = document.createElement("p");
+    brand.className = "post-item__brand";
+    brand.textContent = "BENJOHNS";
+    article.append(brand);
   }
 
   article.append(meta, title, summary, link);
@@ -55,7 +66,7 @@ function createPostCard(post) {
   return article;
 }
 
-function renderPosts(posts, targetNode) {
+function renderPosts(posts, targetNode, variant = "technical") {
   if (!targetNode) {
     return;
   }
@@ -79,61 +90,20 @@ function renderPosts(posts, targetNode) {
       return;
     }
 
-    targetNode.appendChild(createPostCard(post));
+    targetNode.appendChild(createPostCard(post, variant));
   });
 }
 
-function setFlipAvailability(isAvailable) {
-  canFlip = isAvailable;
+function setAnthropicMode(isEnabled) {
+  document.body.classList.toggle("anthropic-mode", isEnabled);
 
-  if (flipButton) {
-    flipButton.disabled = !isAvailable;
+  if (personalBlogSection) {
+    personalBlogSection.hidden = !isEnabled;
   }
 
-  if (!flipTriggerSection) {
-    return;
+  if (themeToggle) {
+    themeToggle.setAttribute("aria-pressed", String(isEnabled));
   }
-
-  const previousHint = flipTriggerSection.querySelector(".flip-hint");
-  if (previousHint) {
-    previousHint.remove();
-  }
-
-  const hint = document.createElement("p");
-  hint.className = "flip-hint";
-  hint.textContent = isAvailable
-    ? "Flip unlocked. Press the button to enter blog mode."
-    : "Scroll to the page bottom to unlock the flip.";
-  flipTriggerSection.appendChild(hint);
-}
-
-function isAtPageBottom() {
-  const threshold = 32;
-  const viewportBottom = window.scrollY + window.innerHeight;
-  return viewportBottom >= document.documentElement.scrollHeight - threshold;
-}
-
-function flipToBlog() {
-  if (!siteShell || !canFlip) {
-    return;
-  }
-
-  siteShell.classList.add("is-flipped");
-  document.body.classList.add("blog-mode");
-  blogFace?.setAttribute("aria-hidden", "false");
-  portfolioFace?.setAttribute("aria-hidden", "true");
-}
-
-function flipToPortfolio() {
-  if (!siteShell) {
-    return;
-  }
-
-  siteShell.classList.remove("is-flipped");
-  document.body.classList.remove("blog-mode");
-  blogFace?.setAttribute("aria-hidden", "true");
-  portfolioFace?.setAttribute("aria-hidden", "false");
-  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 async function loadBlogData() {
@@ -150,8 +120,8 @@ async function loadBlogData() {
 
     const blogData = await response.json();
 
-    renderPosts(blogData.technical, technicalPostsContainer);
-    renderPosts(blogData.personal, personalPostsContainer);
+    renderPosts(blogData.technical, technicalPostsContainer, "technical");
+    renderPosts(blogData.personal, personalPostsContainer, "personal");
   } catch (error) {
     const message = document.createElement("p");
     message.className = "flip-hint";
@@ -164,20 +134,18 @@ async function loadBlogData() {
   }
 }
 
-function initFlipBehavior() {
-  setFlipAvailability(isAtPageBottom());
+function initHiddenToggle() {
+  setAnthropicMode(false);
 
-  window.addEventListener("scroll", () => {
-    setFlipAvailability(isAtPageBottom());
+  themeToggle?.addEventListener("click", () => {
+    const isActive = document.body.classList.contains("anthropic-mode");
+    setAnthropicMode(!isActive);
   });
-
-  flipButton?.addEventListener("click", flipToBlog);
-  returnButton?.addEventListener("click", flipToPortfolio);
 }
 
 function init() {
   loadBlogData();
-  initFlipBehavior();
+  initHiddenToggle();
 }
 
 init();
