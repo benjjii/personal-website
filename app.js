@@ -17,12 +17,13 @@ function formatDate(isoDate) {
   });
 }
 
-function createPostCard(post) {
+function createPostCard(post, variant = "technical") {
   const article = document.createElement("article");
-  article.className = "post-item";
+  article.className = `post-item post-item--${variant}`;
 
   const safeUrl = post.url && post.url.trim().length > 0 ? post.url : "#";
   const tags = Array.isArray(post.tags) ? post.tags : [];
+  const titleText = post.title || "Untitled";
   const meta = document.createElement("p");
   meta.className = "post-item__meta";
   meta.textContent = `${formatDate(post.date)}${
@@ -30,18 +31,34 @@ function createPostCard(post) {
   }`;
 
   const title = document.createElement("h3");
-  title.textContent = post.title;
+  const titleLink = document.createElement("a");
+  titleLink.href = safeUrl;
+  titleLink.textContent = titleText;
+
+  if (safeUrl.startsWith("http")) {
+    titleLink.target = "_blank";
+    titleLink.rel = "noreferrer";
+  }
+
+  title.appendChild(titleLink);
 
   const summary = document.createElement("p");
   summary.textContent = post.summary;
 
   const link = document.createElement("a");
   link.href = safeUrl;
-  link.textContent = "Read post";
+  link.textContent = variant === "personal" ? "Open note" : "Read post";
 
   if (safeUrl.startsWith("http")) {
     link.target = "_blank";
     link.rel = "noreferrer";
+  }
+
+  if (variant === "personal") {
+    const brand = document.createElement("p");
+    brand.className = "post-item__brand";
+    brand.textContent = "BENJOHNS";
+    article.append(brand);
   }
 
   article.append(meta, title, summary, link);
@@ -49,7 +66,7 @@ function createPostCard(post) {
   return article;
 }
 
-function renderPosts(posts, targetNode) {
+function renderPosts(posts, targetNode, variant = "technical") {
   if (!targetNode) {
     return;
   }
@@ -73,7 +90,7 @@ function renderPosts(posts, targetNode) {
       return;
     }
 
-    targetNode.appendChild(createPostCard(post));
+    targetNode.appendChild(createPostCard(post, variant));
   });
 }
 
@@ -103,8 +120,8 @@ async function loadBlogData() {
 
     const blogData = await response.json();
 
-    renderPosts(blogData.technical, technicalPostsContainer);
-    renderPosts(blogData.personal, personalPostsContainer);
+    renderPosts(blogData.technical, technicalPostsContainer, "technical");
+    renderPosts(blogData.personal, personalPostsContainer, "personal");
   } catch (error) {
     const message = document.createElement("p");
     message.className = "flip-hint";
