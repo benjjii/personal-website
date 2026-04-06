@@ -13,22 +13,20 @@
   <body>
     <main class="page">
       <header class="intro">
-        <p class="site-name">Ben Johns</p>
+        <p class="site-name">Benjamin Johns</p>
         <div class="identity-row">
           <div class="avatar" aria-hidden="true">bj</div>
           <div>
-            <p class="identity-line">hello world</p>
-            <p class="identity-line muted">san francisco, california</p>
+            <p class="identity-line">Chicago, Illinois</p>
+            <p class="identity-line muted">software engineer</p>
           </div>
         </div>
-        <p class="tagline">Product-focused software engineer.</p>
-        <p>
-          I'm interested in open source, delightful user experiences, and the
-          future of technology.
+        <p class="tagline">
+          Obsessed with how AI will change the way we think and work together.
         </p>
         <p>
-          When not writing code, I enjoy admiring bookshelves, capturing
-          photographs, reading, and discovering more about what I don't know.
+          I build software and systems with a focus on practical impact,
+          clarity, and long-term thinking.
         </p>
         <p>
           Find me on
@@ -59,7 +57,17 @@
       </section>
 
       <section class="section" id="technical-writing">
-        <h2>Technical Blog</h2>
+        <div class="section-heading-inline">
+          <h2>Technical Blog</h2>
+          <button
+            class="lock-button"
+            id="unlockTechnicalButton"
+            type="button"
+            aria-label="Unlock technical blog editor"
+          >
+            🔒
+          </button>
+        </div>
         <div class="post-list post-list--technical" id="technicalPosts"></div>
       </section>
 
@@ -113,6 +121,53 @@
         </button>
       </footer>
     </main>
+
+    <div class="modal" id="technicalModal" hidden>
+      <div class="modal__backdrop" id="modalBackdrop"></div>
+      <div
+        class="modal__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="technicalModalTitle"
+      >
+        <h3 id="technicalModalTitle">Add Technical Blog</h3>
+        <p class="muted">Title and body are required.</p>
+        <form id="technicalPostForm">
+          <label class="field">
+            <span>Title</span>
+            <input
+              id="technicalPostTitle"
+              name="title"
+              type="text"
+              maxlength="120"
+              required
+            />
+          </label>
+          <label class="field">
+            <span>Body</span>
+            <textarea
+              id="technicalPostBody"
+              name="body"
+              rows="7"
+              maxlength="4000"
+              required
+            ></textarea>
+          </label>
+          <div class="modal__actions">
+            <button
+              class="modal__btn modal__btn--ghost"
+              id="cancelTechnicalPost"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button class="modal__btn modal__btn--primary" type="submit">
+              Publish
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <script type="module" src="./app.js"></script>
   </body>

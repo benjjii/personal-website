@@ -29,7 +29,12 @@ body {
   min-height: 100vh;
   font-family: "IBM Plex Sans", "Inter", "Segoe UI", Roboto, Helvetica, Arial,
     sans-serif;
-  background: var(--portfolio-bg);
+  background-color: var(--portfolio-bg);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 34px 34px;
+  background-attachment: fixed;
   color: var(--portfolio-text);
   line-height: 1.62;
   transition: background 250ms ease, color 250ms ease;
@@ -38,7 +43,11 @@ body {
 }
 
 body.anthropic-mode {
-  background: var(--anthropic-bg);
+  background-color: var(--anthropic-bg);
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 34px 34px;
   color: var(--anthropic-text);
 }
 
@@ -59,8 +68,8 @@ body.anthropic-mode a {
 
 .page {
   width: min(100%, 560px);
-  margin-left: clamp(1rem, 18vw, 12.2rem);
-  margin-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
   padding: clamp(2rem, 5vw, 4.4rem) 0 3.5rem;
 }
 
@@ -73,6 +82,12 @@ h2 {
   font-size: 1.02rem;
   font-weight: 540;
   letter-spacing: -0.003em;
+}
+
+.section-heading-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.48rem;
 }
 
 .post-item__meta {
@@ -197,6 +212,27 @@ code {
   padding-bottom: 1rem;
 }
 
+.lock-button {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: var(--portfolio-link);
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.lock-button:hover {
+  color: var(--portfolio-link-hover);
+  border-color: rgba(255, 255, 255, 0.34);
+}
+
 .secret-toggle {
   margin-top: 2.4rem;
   width: 1rem;
@@ -228,6 +264,85 @@ code {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+}
+
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.64);
+}
+
+.modal__panel {
+  position: relative;
+  width: min(92vw, 560px);
+  background: #1a1817;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.7rem;
+  padding: 1rem;
+}
+
+.modal__panel h3 {
+  margin: 0 0 0.2rem;
+  font-size: 1rem;
+}
+
+.field {
+  display: block;
+  margin-top: 0.8rem;
+}
+
+.field span {
+  display: inline-block;
+  font-size: 0.85rem;
+  margin-bottom: 0.32rem;
+  color: var(--portfolio-muted);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.21);
+  background: #131212;
+  color: var(--portfolio-text);
+  border-radius: 0.45rem;
+  padding: 0.56rem 0.66rem;
+  font-size: 0.92rem;
+  font-family: inherit;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.56rem;
+  margin-top: 0.88rem;
+}
+
+.modal__btn {
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  padding: 0.42rem 0.82rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+  background: transparent;
+  color: var(--portfolio-text);
+}
+
+.modal__btn--primary {
+  border-color: transparent;
+  background: #d8d2ca;
+  color: #111;
 }
 
 body.anthropic-mode .muted,
@@ -289,6 +404,37 @@ body.anthropic-mode .post-item--personal h3 {
 
 body.anthropic-mode .secret-toggle {
   opacity: 0.66;
+}
+
+body.anthropic-mode .lock-button {
+  border-color: rgba(0, 0, 0, 0.2);
+  color: var(--anthropic-text);
+}
+
+body.anthropic-mode .modal__panel {
+  background: #f3eee4;
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+body.anthropic-mode .field span {
+  color: var(--anthropic-muted);
+}
+
+body.anthropic-mode .field input,
+body.anthropic-mode .field textarea {
+  background: #fffef9;
+  border-color: rgba(0, 0, 0, 0.2);
+  color: var(--anthropic-text);
+}
+
+body.anthropic-mode .modal__btn {
+  border-color: rgba(0, 0, 0, 0.24);
+  color: var(--anthropic-text);
+}
+
+body.anthropic-mode .modal__btn--primary {
+  background: #1f2023;
+  color: #f6f2ea;
 }
 
 .flip-hint {
