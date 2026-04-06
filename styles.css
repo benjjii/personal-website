@@ -1,0 +1,369 @@
+:root {
+  --bg-dark: #0f1115;
+  --bg-card-dark: #171a21;
+  --text-dark: #f2f4f8;
+  --muted-dark: #a2acbd;
+  --line-dark: #2a3040;
+  --accent: #6f8dff;
+
+  --bg-light: #f5f5ef;
+  --bg-card-light: #ffffff;
+  --text-light: #11131a;
+  --muted-light: #4d5568;
+  --line-light: #d8dde7;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-dark);
+  line-height: 1.6;
+  transition: background 400ms ease, color 400ms ease;
+}
+
+body.blog-mode {
+  background: var(--bg-light);
+  color: var(--text-light);
+}
+
+a {
+  color: inherit;
+}
+
+.site-shell {
+  position: relative;
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+  perspective: 1700px;
+  padding: 2rem 0 4rem;
+}
+
+.face {
+  border-radius: 1.2rem;
+  border: 1px solid var(--line-dark);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: transform 900ms cubic-bezier(0.21, 0.68, 0.24, 1),
+    opacity 600ms ease;
+}
+
+.face--portfolio {
+  position: relative;
+  background: linear-gradient(180deg, #0f1115 0%, #10131a 100%);
+  opacity: 1;
+  transform: rotateX(0deg);
+}
+
+.face--blog {
+  position: absolute;
+  inset: 2rem 0 4rem;
+  background: var(--bg-light);
+  color: var(--text-light);
+  border-color: var(--line-light);
+  opacity: 0;
+  pointer-events: none;
+  transform: rotateX(-180deg) rotate(180deg);
+}
+
+.site-shell.is-flipped .face--portfolio {
+  transform: rotateX(180deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.site-shell.is-flipped .face--blog {
+  transform: rotateX(0deg) rotate(180deg);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.section,
+.site-header,
+.site-footer,
+.blog-header {
+  padding-left: clamp(1rem, 3vw, 2.75rem);
+  padding-right: clamp(1rem, 3vw, 2.75rem);
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.5rem;
+}
+
+.brand {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.main-nav a {
+  color: var(--muted-dark);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 200ms ease, border-color 200ms ease;
+}
+
+.main-nav a:hover {
+  color: var(--text-dark);
+  border-color: var(--line-dark);
+}
+
+.section {
+  padding-top: 3rem;
+  padding-bottom: 0.5rem;
+}
+
+.hero {
+  padding-top: 4.25rem;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 14ch;
+  font-size: clamp(2rem, 7vw, 4rem);
+  line-height: 1.08;
+  margin-bottom: 0.8rem;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  line-height: 1.18;
+  margin-bottom: 0.85rem;
+}
+
+h3 {
+  font-size: 1.12rem;
+}
+
+.lede {
+  max-width: 65ch;
+  color: var(--muted-dark);
+}
+
+.body-copy {
+  max-width: 70ch;
+  color: var(--muted-dark);
+}
+
+.eyebrow {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--muted-dark);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.2rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line-dark);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-dark);
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.68rem 1.15rem;
+  transition: transform 180ms ease, background 180ms ease, opacity 180ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  border-color: transparent;
+  background: var(--accent);
+  color: #f6f8ff;
+}
+
+.btn--ghost {
+  color: var(--text-dark);
+}
+
+.btn--ghost-dark {
+  border-color: var(--line-light);
+  color: var(--text-light);
+}
+
+.section-heading {
+  margin-bottom: 1.25rem;
+}
+
+.card-grid,
+.interest-grid,
+.post-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.card-grid {
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+}
+
+.card,
+.interest-grid article,
+.post-item {
+  border: 1px solid var(--line-dark);
+  background: var(--bg-card-dark);
+  border-radius: 0.8rem;
+  padding: 1rem;
+}
+
+.tags {
+  list-style: none;
+  margin: 0.9rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tags li {
+  font-size: 0.8rem;
+  color: var(--muted-dark);
+  border: 1px solid var(--line-dark);
+  border-radius: 999px;
+  padding: 0.16rem 0.52rem;
+}
+
+.post-list {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.post-item__meta {
+  margin-bottom: 0.5rem;
+  color: var(--muted-dark);
+  font-size: 0.82rem;
+}
+
+.post-item p {
+  color: var(--muted-dark);
+}
+
+.post-item a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.section--flip-trigger {
+  margin-top: 1.25rem;
+  margin-bottom: 2rem;
+  border-top: 1px solid var(--line-dark);
+  padding-top: 2rem;
+}
+
+.flip-hint {
+  color: var(--muted-dark);
+  margin-top: 0.8rem;
+}
+
+.site-footer {
+  border-top: 1px solid var(--line-dark);
+  margin-top: 1.9rem;
+  padding-top: 2rem;
+  padding-bottom: 2.2rem;
+}
+
+.site-footer a {
+  color: var(--text-dark);
+}
+
+.blog-header {
+  padding-top: 2.4rem;
+  border-bottom: 1px solid var(--line-light);
+  padding-bottom: 1.5rem;
+}
+
+.blog-header p {
+  color: var(--muted-light);
+  max-width: 66ch;
+}
+
+.face--blog .eyebrow {
+  color: var(--muted-light);
+}
+
+.face--blog .post-item {
+  border-color: var(--line-light);
+  background: var(--bg-card-light);
+}
+
+.face--blog .post-item p,
+.face--blog .post-item__meta {
+  color: var(--muted-light);
+}
+
+.section--blog-posts {
+  padding-top: 1.8rem;
+  padding-bottom: 2rem;
+}
+
+code {
+  font-family: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 0.9em;
+}
+
+@media (max-width: 850px) {
+  .face--blog {
+    inset: 2rem 0 4rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .main-nav {
+    gap: 0.8rem;
+  }
+
+  .hero {
+    padding-top: 3rem;
+  }
+}
