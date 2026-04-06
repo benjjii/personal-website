@@ -268,6 +268,7 @@ function initHiddenToggle() {
 }
 
 function initTechnicalEditor() {
+  closeTechnicalModal();
   unlockTechnicalButton?.addEventListener("click", unlockTechnicalEditor);
   cancelTechnicalPostButton?.addEventListener("click", closeTechnicalModal);
   modalBackdrop?.addEventListener("click", closeTechnicalModal);
