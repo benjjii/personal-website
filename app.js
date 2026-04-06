@@ -2,6 +2,45 @@ const technicalPostsContainer = document.getElementById("technicalPosts");
 const personalPostsContainer = document.getElementById("personalPosts");
 const themeToggle = document.getElementById("themeToggle");
 const personalBlogSection = document.getElementById("personalBlogSection");
+const unlockTechnicalButton = document.getElementById("unlockTechnicalButton");
+const technicalModal = document.getElementById("technicalModal");
+const modalBackdrop = document.getElementById("modalBackdrop");
+const technicalPostForm = document.getElementById("technicalPostForm");
+const technicalPostTitle = document.getElementById("technicalPostTitle");
+const technicalPostBody = document.getElementById("technicalPostBody");
+const cancelTechnicalPostButton = document.getElementById("cancelTechnicalPost");
+
+const TECHNICAL_POSTS_KEY = "customTechnicalPosts";
+const TECHNICAL_POST_PASSWORD = "benislucky";
+const DEFAULT_PERSONAL_POSTS = [
+  {
+    title: "What Running Teaches Me About Engineering",
+    date: "2026-03-22",
+    summary:
+      "Consistency compounds. A short note about patience, systems, and long-term thinking.",
+    url: "#",
+    tags: ["Personal", "Habits"],
+  },
+  {
+    title: "On Slowing Down To Learn Faster",
+    date: "2026-02-28",
+    summary:
+      "Why fewer projects with deeper reflection can outperform frantic context switching.",
+    url: "#",
+    tags: ["Learning", "Mindset"],
+  },
+  {
+    title: "A Weekend Photography Walk",
+    date: "2026-01-30",
+    summary:
+      "Notes from a calm day with no agenda except noticing details and following good light.",
+    url: "#",
+    tags: ["Photography", "Life"],
+  },
+];
+
+let personalPosts = [];
+let technicalPosts = [];
 
 function formatDate(isoDate) {
   const parsedDate = new Date(`${isoDate}T00:00:00`);
@@ -76,7 +115,10 @@ function renderPosts(posts, targetNode, variant = "technical") {
   if (!Array.isArray(posts) || posts.length === 0) {
     const emptyState = document.createElement("p");
     emptyState.className = "flip-hint";
-    emptyState.textContent = "No posts yet. Add one in content/blog-posts.json.";
+    emptyState.textContent =
+      variant === "technical"
+        ? "No technical posts yet. Click the lock to add your first post."
+        : "No personal posts yet. Add one in content/blog-posts.json.";
     targetNode.appendChild(emptyState);
     return;
   }
@@ -92,6 +134,87 @@ function renderPosts(posts, targetNode, variant = "technical") {
 
     targetNode.appendChild(createPostCard(post, variant));
   });
+}
+
+function saveTechnicalPosts() {
+  try {
+    localStorage.setItem(TECHNICAL_POSTS_KEY, JSON.stringify(technicalPosts));
+  } catch (error) {
+    console.error("Could not persist technical posts.", error);
+  }
+}
+
+function loadSavedTechnicalPosts() {
+  try {
+    const raw = localStorage.getItem(TECHNICAL_POSTS_KEY);
+    if (!raw) {
+      return [];
+    }
+
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    console.error("Could not load saved technical posts.", error);
+    return [];
+  }
+}
+
+function openTechnicalModal() {
+  if (!technicalModal) {
+    return;
+  }
+
+  technicalModal.hidden = false;
+  requestAnimationFrame(() => {
+    technicalPostTitle?.focus();
+  });
+}
+
+function closeTechnicalModal() {
+  if (!technicalModal) {
+    return;
+  }
+
+  technicalModal.hidden = true;
+  technicalPostForm?.reset();
+}
+
+function addTechnicalPostFromForm(event) {
+  event.preventDefault();
+
+  const title = technicalPostTitle?.value.trim();
+  const body = technicalPostBody?.value.trim();
+
+  if (!title || !body) {
+    return;
+  }
+
+  technicalPosts.push({
+    title,
+    summary: body,
+    date: new Date().toISOString().slice(0, 10),
+    url: "#",
+    tags: ["Technical"],
+  });
+
+  saveTechnicalPosts();
+  renderPosts(technicalPosts, technicalPostsContainer, "technical");
+  closeTechnicalModal();
+}
+
+function unlockTechnicalEditor() {
+  const input = window.prompt("Enter password to unlock technical blog editor:");
+
+  if (!input) {
+    return;
+  }
+
+  if (input !== TECHNICAL_POST_PASSWORD) {
+    window.alert("Incorrect password.");
+    return;
+  }
+
+  openTechnicalModal();
 }
 
 function setAnthropicMode(isEnabled) {
@@ -119,17 +242,18 @@ async function loadBlogData() {
     }
 
     const blogData = await response.json();
+    personalPosts = Array.isArray(blogData.personal)
+      ? blogData.personal
+      : DEFAULT_PERSONAL_POSTS;
 
-    renderPosts(blogData.technical, technicalPostsContainer, "technical");
-    renderPosts(blogData.personal, personalPostsContainer, "personal");
+    technicalPosts = loadSavedTechnicalPosts();
+    renderPosts(technicalPosts, technicalPostsContainer, "technical");
+    renderPosts(personalPosts, personalPostsContainer, "personal");
   } catch (error) {
-    const message = document.createElement("p");
-    message.className = "flip-hint";
-    message.textContent =
-      "Could not load posts. Check content/blog-posts.json format.";
-
-    technicalPostsContainer?.appendChild(message.cloneNode(true));
-    personalPostsContainer?.appendChild(message);
+    technicalPosts = loadSavedTechnicalPosts();
+    personalPosts = DEFAULT_PERSONAL_POSTS;
+    renderPosts(technicalPosts, technicalPostsContainer, "technical");
+    renderPosts(personalPosts, personalPostsContainer, "personal");
     console.error(error);
   }
 }
@@ -143,9 +267,23 @@ function initHiddenToggle() {
   });
 }
 
+function initTechnicalEditor() {
+  unlockTechnicalButton?.addEventListener("click", unlockTechnicalEditor);
+  cancelTechnicalPostButton?.addEventListener("click", closeTechnicalModal);
+  modalBackdrop?.addEventListener("click", closeTechnicalModal);
+  technicalPostForm?.addEventListener("submit", addTechnicalPostFromForm);
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && technicalModal && !technicalModal.hidden) {
+      closeTechnicalModal();
+    }
+  });
+}
+
 function init() {
   loadBlogData();
   initHiddenToggle();
+  initTechnicalEditor();
 }
 
 init();
