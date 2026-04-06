@@ -5,169 +5,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Personal website with portfolio projects, technical writing, and a flip-page personal blog."
+      content="Personal website with a minimalist single-page portfolio and a hidden anthropic-style personal blog mode."
     />
-    <title>Personal Website | Portfolio + Blog</title>
+    <title>benjohns.dev</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="site-shell">
-      <main class="face face--portfolio" id="portfolioFace">
-        <header class="site-header">
-          <a class="brand" href="#top">your-name.dev</a>
-          <nav class="main-nav" aria-label="Primary">
-            <a href="#projects">Projects</a>
-            <a href="#technical-writing">Writing</a>
-            <a href="#interests">Interests</a>
-            <a href="#contact">Contact</a>
-          </nav>
-        </header>
-
-        <section class="hero section" id="top">
-          <p class="eyebrow">Software Engineer</p>
-          <h1>Building thoughtful products and writing what I learn.</h1>
-          <p class="lede">
-            I design and build web products, share technical writeups, and stay
-            curious across engineering, design, and everyday life.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn--primary" href="#projects">View projects</a>
-            <a class="btn btn--ghost" href="#technical-writing">Read technical blogs</a>
+    <main class="page">
+      <header class="intro">
+        <p class="site-name">Ben Johns</p>
+        <div class="identity-row">
+          <div class="avatar" aria-hidden="true">bj</div>
+          <div>
+            <p class="identity-line">hello world</p>
+            <p class="identity-line muted">san francisco, california</p>
           </div>
-        </section>
+        </div>
+        <p class="tagline">Product-focused software engineer.</p>
+        <p>
+          I'm interested in open source, delightful user experiences, and the
+          future of technology.
+        </p>
+        <p>
+          When not writing code, I enjoy admiring bookshelves, capturing
+          photographs, reading, and discovering more about what I don't know.
+        </p>
+        <p>
+          Find me on
+          <a href="https://x.com" target="_blank" rel="noreferrer">Twitter</a>,
+          <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>,
+          <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>,
+          or
+          <a href="https://www.goodreads.com" target="_blank" rel="noreferrer">Goodreads</a>.
+        </p>
+      </header>
 
-        <section class="section" id="about">
-          <div class="section-heading">
-            <p class="eyebrow">About</p>
-            <h2>What I focus on</h2>
-          </div>
-          <p class="body-copy">
-            I enjoy building practical systems, clean product experiences, and
-            useful tools that help people move faster with confidence. Most of
-            my work lives at the intersection of backend reliability, frontend
-            usability, and developer experience.
-          </p>
-        </section>
+      <section class="section" id="now">
+        <h2>Now</h2>
+        <p>
+          I'm currently imagining what
+          <a href="#now">life</a>
+          I'll be proud of ten years from now. Working backward from there.
+        </p>
+      </section>
 
-        <section class="section" id="projects">
-          <div class="section-heading">
-            <p class="eyebrow">Selected work</p>
-            <h2>Projects I have built</h2>
-          </div>
-          <div class="card-grid">
-            <article class="card">
-              <h3>Deploy Dashboard</h3>
-              <p>
-                A release command center that visualizes deployments, health
-                checks, and rollback actions in one place.
-              </p>
-              <ul class="tags">
-                <li>TypeScript</li>
-                <li>Node.js</li>
-                <li>PostgreSQL</li>
-              </ul>
-            </article>
-            <article class="card">
-              <h3>Docs Search Assistant</h3>
-              <p>
-                A semantic documentation search tool that helps developers find
-                accurate implementation snippets in seconds.
-              </p>
-              <ul class="tags">
-                <li>Python</li>
-                <li>Embeddings</li>
-                <li>FastAPI</li>
-              </ul>
-            </article>
-            <article class="card">
-              <h3>Realtime Analytics Studio</h3>
-              <p>
-                A lightweight analytics platform for product teams to track
-                events, funnel drops, and retention trends.
-              </p>
-              <ul class="tags">
-                <li>React</li>
-                <li>Redis</li>
-                <li>Docker</li>
-              </ul>
-            </article>
-          </div>
-        </section>
+      <section class="section" id="projects">
+        <h2>Projects</h2>
+        <ul class="link-list">
+          <li>
+            <a href="#" aria-label="Deploy Dashboard project">deploy dashboard</a>
+          </li>
+          <li>
+            <a href="#" aria-label="Docs Search Assistant project">docs search assistant</a>
+          </li>
+          <li>
+            <a href="#" aria-label="Realtime Analytics Studio project">realtime analytics studio</a>
+          </li>
+        </ul>
+      </section>
 
-        <section class="section" id="technical-writing">
-          <div class="section-heading">
-            <p class="eyebrow">Technical blog</p>
-            <h2>Recent technical writing</h2>
-          </div>
-          <div class="post-list" id="technicalPosts"></div>
-        </section>
+      <section class="section" id="technical-writing">
+        <h2>Technical Blog</h2>
+        <div class="post-list" id="technicalPosts"></div>
+      </section>
 
-        <section class="section" id="interests">
-          <div class="section-heading">
-            <p class="eyebrow">Outside work</p>
-            <h2>Interests</h2>
-          </div>
-          <div class="interest-grid">
-            <article>
-              <h3>Writing</h3>
-              <p>Long-form notes on software, focus, and learning systems.</p>
-            </article>
-            <article>
-              <h3>Running</h3>
-              <p>Building discipline one early morning at a time.</p>
-            </article>
-            <article>
-              <h3>Photography</h3>
-              <p>Capturing simple moments, mostly city streets and landscapes.</p>
-            </article>
-          </div>
-        </section>
+      <section class="section" id="interests">
+        <h2>Interests</h2>
+        <ul class="link-list">
+          <li><a href="#interests">writing</a></li>
+          <li><a href="#interests">running</a></li>
+          <li><a href="#interests">photography</a></li>
+          <li><a href="#interests">reading</a></li>
+        </ul>
+      </section>
 
-        <section class="section section--flip-trigger" id="flipTrigger">
-          <p class="eyebrow">The other side</p>
-          <h2>Ready for the personal side?</h2>
-          <p>
-            Scroll reached the bottom. Flip the page to enter the personal blog
-            in light mode.
-          </p>
-          <button class="btn btn--primary" id="flipButton" type="button">
-            Flip the page
-          </button>
-        </section>
+      <section class="section" id="garden">
+        <h2>The Garden</h2>
+        <ul class="link-list muted-links">
+          <li><a href="#">second brain</a></li>
+          <li><a href="#">bucket list</a></li>
+          <li><a href="#">projects</a></li>
+          <li><a href="#">failures</a></li>
+          <li><a href="#">books</a></li>
+          <li><a href="#">words</a></li>
+          <li><a href="#">uses</a></li>
+        </ul>
+      </section>
 
-        <footer class="site-footer section" id="contact">
-          <p class="eyebrow">Contact</p>
-          <h2>Let’s build something meaningful.</h2>
-          <p class="body-copy">
-            Email: <a href="mailto:hello@example.com">hello@example.com</a> ·
-            GitHub: <a href="https://github.com" target="_blank" rel="noreferrer">github.com/your-handle</a>
-          </p>
-        </footer>
-      </main>
+      <section class="section personal-blog" id="personalBlogSection" hidden>
+        <h2>Personal Blog</h2>
+        <p class="muted">
+          Hidden mode unlocked. This palette is inspired by Anthropic's card
+          style and shows personal writing from
+          <code>content/blog-posts.json</code>.
+        </p>
+        <div class="personal-cards" id="personalPosts"></div>
+      </section>
 
-      <main class="face face--blog" id="blogFace" aria-hidden="true">
-        <header class="blog-header">
-          <p class="eyebrow">Personal Blog Mode</p>
-          <h2>The page has flipped.</h2>
-          <p>
-            This side is intentionally upside down and light mode. Add your own
-            personal posts anytime via
-            <code>content/blog-posts.json</code>.
-          </p>
-          <button class="btn btn--ghost-dark" id="returnButton" type="button">
-            Flip back to portfolio
-          </button>
-        </header>
-
-        <section class="section section--blog-posts">
-          <div class="section-heading">
-            <p class="eyebrow">Personal entries</p>
-            <h2>Notes beyond technical work</h2>
-          </div>
-          <div class="post-list post-list--blog" id="personalPosts"></div>
-        </section>
-      </main>
-    </div>
+      <footer class="section endcap" id="contact">
+        <p>
+          Email:
+          <a href="mailto:hello@example.com">hello@example.com</a>
+        </p>
+        <button
+          class="secret-toggle"
+          id="themeToggle"
+          type="button"
+          aria-controls="personalBlogSection"
+          aria-pressed="false"
+        >
+          <span aria-hidden="true">.</span>
+          <span class="sr-only">Show personal blog in anthropic mode</span>
+        </button>
+      </footer>
+    </main>
 
     <script type="module" src="./app.js"></script>
   </body>

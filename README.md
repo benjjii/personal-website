@@ -1,9 +1,9 @@
 # personal-website
 
-A minimalist personal website + blog with two modes:
+A strict, minimalist single-page personal site inspired by anthonymorris.dev:
 
-- **Portfolio mode (dark):** landing page with projects, technical writing, interests, and contact.
-- **Personal blog mode (light + upside down):** unlocked at the bottom of the page via a "Flip the page" button.
+- **Default mode:** dark, text-first portfolio layout with all links on one page.
+- **Hidden mode:** a subtle bottom toggle switches to an Anthropic-inspired light palette and reveals the personal blog section.
 
 ## Local run
 
@@ -17,17 +17,17 @@ Then open `http://localhost:8000`.
 
 ## Project structure
 
-- `index.html` - page structure and sections
-- `styles.css` - visual design and page flip animation
-- `app.js` - blog rendering and flip behavior
+- `index.html` - single-page structure and sections
+- `styles.css` - strict typography/layout styling and Anthropic-mode palette
+- `app.js` - JSON post rendering and hidden mode toggle behavior
 - `content/blog-posts.json` - editable technical + personal blog data
 
 ## Add your own blog posts
 
 Edit `content/blog-posts.json` and add entries to either:
 
-- `technical` for technical posts shown on the portfolio side
-- `personal` for posts shown on the flipped personal-blog side
+- `technical` for technical posts shown in the default portfolio view
+- `personal` for posts shown in hidden Anthropic mode
 
 Each post should follow this shape:
 
@@ -45,3 +45,8 @@ Notes:
 
 - Use ISO dates (`YYYY-MM-DD`) for sorting.
 - Use `#` for `url` if a post is not published yet.
+
+## Hidden toggle behavior
+
+- At the bottom of the page there is a small, minimal button.
+- Clicking it toggles **Anthropic mode** (light palette) and reveals/hides the personal blog section.

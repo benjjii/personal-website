@@ -1,13 +1,7 @@
-const siteShell = document.querySelector(".site-shell");
-const portfolioFace = document.getElementById("portfolioFace");
-const blogFace = document.getElementById("blogFace");
-const flipButton = document.getElementById("flipButton");
-const returnButton = document.getElementById("returnButton");
 const technicalPostsContainer = document.getElementById("technicalPosts");
 const personalPostsContainer = document.getElementById("personalPosts");
-const flipTriggerSection = document.getElementById("flipTrigger");
-
-let canFlip = false;
+const themeToggle = document.getElementById("themeToggle");
+const personalBlogSection = document.getElementById("personalBlogSection");
 
 function formatDate(isoDate) {
   const parsedDate = new Date(`${isoDate}T00:00:00`);
@@ -83,57 +77,16 @@ function renderPosts(posts, targetNode) {
   });
 }
 
-function setFlipAvailability(isAvailable) {
-  canFlip = isAvailable;
+function setAnthropicMode(isEnabled) {
+  document.body.classList.toggle("anthropic-mode", isEnabled);
 
-  if (flipButton) {
-    flipButton.disabled = !isAvailable;
+  if (personalBlogSection) {
+    personalBlogSection.hidden = !isEnabled;
   }
 
-  if (!flipTriggerSection) {
-    return;
+  if (themeToggle) {
+    themeToggle.setAttribute("aria-pressed", String(isEnabled));
   }
-
-  const previousHint = flipTriggerSection.querySelector(".flip-hint");
-  if (previousHint) {
-    previousHint.remove();
-  }
-
-  const hint = document.createElement("p");
-  hint.className = "flip-hint";
-  hint.textContent = isAvailable
-    ? "Flip unlocked. Press the button to enter blog mode."
-    : "Scroll to the page bottom to unlock the flip.";
-  flipTriggerSection.appendChild(hint);
-}
-
-function isAtPageBottom() {
-  const threshold = 32;
-  const viewportBottom = window.scrollY + window.innerHeight;
-  return viewportBottom >= document.documentElement.scrollHeight - threshold;
-}
-
-function flipToBlog() {
-  if (!siteShell || !canFlip) {
-    return;
-  }
-
-  siteShell.classList.add("is-flipped");
-  document.body.classList.add("blog-mode");
-  blogFace?.setAttribute("aria-hidden", "false");
-  portfolioFace?.setAttribute("aria-hidden", "true");
-}
-
-function flipToPortfolio() {
-  if (!siteShell) {
-    return;
-  }
-
-  siteShell.classList.remove("is-flipped");
-  document.body.classList.remove("blog-mode");
-  blogFace?.setAttribute("aria-hidden", "true");
-  portfolioFace?.setAttribute("aria-hidden", "false");
-  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 async function loadBlogData() {
@@ -164,20 +117,18 @@ async function loadBlogData() {
   }
 }
 
-function initFlipBehavior() {
-  setFlipAvailability(isAtPageBottom());
+function initHiddenToggle() {
+  setAnthropicMode(false);
 
-  window.addEventListener("scroll", () => {
-    setFlipAvailability(isAtPageBottom());
+  themeToggle?.addEventListener("click", () => {
+    const isActive = document.body.classList.contains("anthropic-mode");
+    setAnthropicMode(!isActive);
   });
-
-  flipButton?.addEventListener("click", flipToBlog);
-  returnButton?.addEventListener("click", flipToPortfolio);
 }
 
 function init() {
   loadBlogData();
-  initFlipBehavior();
+  initHiddenToggle();
 }
 
 init();
