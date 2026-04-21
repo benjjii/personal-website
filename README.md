@@ -1,14 +1,10 @@
 # personal-website
 
-A strict, minimalist single-page personal site inspired by anthonymorris.dev:
-
-- **Default mode:** dark, text-first portfolio layout with all links on one page.
-- **Notebook background:** faint grid lines in both dark and Anthropic modes.
-- **Hidden mode:** a subtle bottom toggle switches to an Anthropic-inspired light palette and reveals the personal blog section.
+A simplified single-page personal site inspired by [anthonymorris.dev](https://anthonymorris.dev/) with a lighter, slightly playful palette.
 
 ## Local run
 
-This is a static site. Run any simple static server from the repo root:
+This is a static site. Run a simple static server from the repo root:
 
 ```bash
 python3 -m http.server 8000
@@ -18,17 +14,17 @@ Then open `http://localhost:8000`.
 
 ## Project structure
 
-- `index.html` - single-page structure and sections
-- `styles.css` - strict typography/layout styling and Anthropic-mode palette
-- `app.js` - JSON post rendering, hidden mode toggle behavior, and locked technical blog editor flow
-- `content/blog-posts.json` - editable technical + personal blog data
+- `index.html` - one-page portfolio layout
+- `styles.css` - layout, typography, and color system
+- `app.js` - post rendering plus optional local draft editor behavior
+- `content/blog-posts.json` - published technical posts and notes
 
-## Add your own blog posts
+## Content model
 
-Edit `content/blog-posts.json` and add entries to either:
+`content/blog-posts.json` contains two arrays:
 
-- `technical` for technical posts shown in the default portfolio view (currently starts empty)
-- `personal` for posts shown in hidden Anthropic mode
+- `technical` for published technical writing
+- `personal` for shorter notes
 
 Each post should follow this shape:
 
@@ -42,23 +38,13 @@ Each post should follow this shape:
 }
 ```
 
-Notes:
+## Draft editor
 
-- Use ISO dates (`YYYY-MM-DD`) for sorting.
-- Use `#` for `url` if a post is not published yet.
+The public homepage no longer opens any writing UI by default.
 
-## Hidden toggle behavior
+If you want to reveal the local draft editor controls, use either:
 
-- At the bottom of the page there is a small, minimal button.
-- Clicking it toggles **Anthropic mode** (light palette) and reveals/hides the personal blog section.
+- `?compose=technical`
+- `#compose-technical`
 
-## Locked technical blog editor
-
-- The **Technical Blog** heading has a lock button.
-- Clicking it prompts for a password.
-- Password: `benislucky`
-- After the correct password, a modal opens where you can enter:
-  - `Title`
-  - `Body`
-- Publishing adds a new technical post immediately on the page.
-- New technical posts are saved in your browser `localStorage` (key: `customTechnicalPosts`).
+Compose mode only reveals the editor option. Drafts are saved to browser `localStorage` under `customTechnicalDrafts` until you move them into `content/blog-posts.json`.

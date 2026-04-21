@@ -5,169 +5,207 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Personal website with a minimalist single-page portfolio and a hidden anthropic-style personal blog mode."
+      content="Benjamin Johns is a software engineer in Chicago building practical AI products, thoughtful interfaces, and systems that age well."
     />
-    <title>benjohns.dev</title>
+    <meta name="theme-color" content="#f8f5ee" />
+    <title>Benjamin Johns</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <main class="page">
-      <header class="intro">
-        <p class="site-name">Benjamin Johns</p>
-        <div class="identity-row">
-          <div class="avatar" aria-hidden="true">bj</div>
-          <div>
-            <p class="identity-line">Chicago, Illinois</p>
-            <p class="identity-line muted">software engineer</p>
+      <header class="hero section">
+        <p class="hero__eyebrow">
+          <span class="hero__dot" aria-hidden="true"></span>
+          Benjamin Johns
+        </p>
+
+        <div class="hero__panel">
+          <div class="hero__copy">
+            <p class="hero__location">Chicago, Illinois</p>
+            <h1>
+              Software engineer building practical AI products with a bias for
+              clarity.
+            </h1>
+            <p class="hero__lead">
+              I care about thoughtful interfaces, reliable systems, and the kind
+              of software that helps people move faster without adding noise.
+            </p>
           </div>
+
+          <aside class="hero__focus" aria-label="Areas of focus">
+            <p class="hero__focus-label">Focused on</p>
+            <ul class="pill-list">
+              <li>AI workflows</li>
+              <li>Internal tools</li>
+              <li>Product systems</li>
+            </ul>
+          </aside>
         </div>
-        <p class="tagline">
-          Obsessed with how AI will change the way we think and work together.
+
+        <p class="hero__body">
+          I like simple software, calm execution, and work that compounds over
+          time. Right now I am especially interested in how AI changes the way
+          teams think, build, and collaborate.
         </p>
-        <p>
-          I build software and systems with a focus on practical impact,
-          clarity, and long-term thinking.
-        </p>
-        <p>
-          Find me on
-          <a href="https://x.com" target="_blank" rel="noreferrer">Twitter</a>,
-          <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>,
-          <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>,
-          or
-          <a href="https://www.goodreads.com" target="_blank" rel="noreferrer">Goodreads</a>.
-        </p>
+
+        <nav class="hero__links" aria-label="Primary">
+          <a href="https://github.com/benjjii" target="_blank" rel="noreferrer"
+            >GitHub</a
+          >
+          <a href="#now">Now</a>
+          <a href="#writing">Writing</a>
+          <a href="#garden">Garden</a>
+        </nav>
       </header>
 
-      <section class="section" id="now">
-        <h2>Now</h2>
-        <p>
-          I'm currently imagining what
-          <a href="#now">life</a>
-          I'll be proud of ten years from now. Working backward from there.
+      <section class="section section--card" id="now">
+        <p class="section__eyebrow">Now</p>
+        <h2>Building toward work that still feels worthwhile in ten years.</h2>
+        <p class="section__body">
+          I am thinking a lot about durable products, healthy engineering
+          systems, and how to use AI in ways that make people sharper instead of
+          more distracted.
         </p>
       </section>
 
-      <section class="section" id="projects">
-        <h2>Projects</h2>
-        <ul class="link-list">
-          <li><a href="#">deploy dashboard</a></li>
-          <li><a href="#">docs search assistant</a></li>
-          <li><a href="#">realtime analytics studio</a></li>
-        </ul>
+      <section class="section section--card" id="projects">
+        <p class="section__eyebrow">What I Work On</p>
+        <h2>Small teams, ambitious ideas, and software with a clear point of view.</h2>
+        <div class="focus-grid">
+          <article class="focus-card focus-card--mint">
+            <h3>AI products</h3>
+            <p>
+              Tools that help people reason, decide, and execute with less drag.
+            </p>
+          </article>
+          <article class="focus-card focus-card--peach">
+            <h3>Product engineering</h3>
+            <p>
+              Frontend and platform work that stays understandable as teams and
+              features grow.
+            </p>
+          </article>
+          <article class="focus-card focus-card--gold">
+            <h3>Operational clarity</h3>
+            <p>
+              Systems, workflows, and internal tooling that make the right work
+              easier to repeat.
+            </p>
+          </article>
+        </div>
       </section>
 
-      <section class="section" id="technical-writing">
-        <div class="section-heading-inline">
-          <h2>Technical Blog</h2>
+      <section class="section section--card" id="writing">
+        <div class="section__heading">
+          <div>
+            <p class="section__eyebrow">Writing</p>
+            <h2>Technical notes and longer-form thinking.</h2>
+          </div>
           <button
-            class="lock-button"
-            id="unlockTechnicalButton"
+            class="editor-toggle"
+            id="composeToggle"
             type="button"
-            aria-label="Unlock technical blog editor"
+            hidden
+            aria-controls="technicalEditor"
+            aria-expanded="false"
           >
-            🔒
+            Open draft editor
           </button>
         </div>
-        <div class="post-list post-list--technical" id="technicalPosts"></div>
-      </section>
 
-      <section class="section" id="interests">
-        <h2>Interests</h2>
-        <ul class="link-list">
-          <li><a href="#interests">writing</a></li>
-          <li><a href="#interests">running</a></li>
-          <li><a href="#interests">photography</a></li>
-          <li><a href="#interests">reading</a></li>
-        </ul>
-      </section>
-
-      <section class="section" id="garden">
-        <h2>The Garden</h2>
-        <ul class="link-list muted-links">
-          <li><a href="#">second brain</a></li>
-          <li><a href="#">bucket list</a></li>
-          <li><a href="#">projects</a></li>
-          <li><a href="#">failures</a></li>
-          <li><a href="#">books</a></li>
-          <li><a href="#">words</a></li>
-          <li><a href="#">uses</a></li>
-        </ul>
-      </section>
-
-      <section class="section personal-blog" id="personalBlogSection" hidden>
-        <h2>Personal Blog</h2>
-        <p class="muted">
-          Hidden mode unlocked. This palette is inspired by Anthropic's card
-          style and shows personal writing from
-          <code>content/blog-posts.json</code>.
+        <p class="section__body">
+          Published posts are read from <code>content/blog-posts.json</code>.
+          The draft editor stays hidden unless compose mode is explicitly
+          enabled.
         </p>
-        <div class="personal-cards" id="personalPosts"></div>
+
+        <p class="compose-note" id="composeModeNotice" hidden>
+          Compose mode is enabled. Drafts stay in this browser until you move
+          them into <code>content/blog-posts.json</code>.
+        </p>
+
+        <div class="post-list" id="technicalPosts"></div>
+
+        <div class="editor" id="technicalEditor" hidden>
+          <form id="technicalPostForm" novalidate>
+            <div class="field-grid">
+              <label class="field">
+                <span>Title</span>
+                <input
+                  id="technicalPostTitle"
+                  name="title"
+                  type="text"
+                  maxlength="120"
+                  required
+                />
+              </label>
+
+              <label class="field">
+                <span>Link</span>
+                <input
+                  id="technicalPostLink"
+                  name="url"
+                  type="url"
+                  placeholder="https://example.com/post"
+                />
+              </label>
+            </div>
+
+            <label class="field">
+              <span>Summary</span>
+              <textarea
+                id="technicalPostBody"
+                name="summary"
+                rows="6"
+                maxlength="4000"
+                required
+              ></textarea>
+            </label>
+
+            <p class="form-message" id="technicalFormMessage" aria-live="polite"></p>
+
+            <div class="editor__actions">
+              <button class="button button--ghost" id="closeEditorButton" type="button">
+                Close
+              </button>
+              <button class="button button--primary" type="submit">
+                Save local draft
+              </button>
+            </div>
+          </form>
+        </div>
       </section>
 
-      <footer class="section endcap" id="contact">
-        <p>
-          Email:
-          <a href="mailto:hello@example.com">hello@example.com</a>
-        </p>
-        <button
-          class="secret-toggle"
-          id="themeToggle"
-          type="button"
-          aria-controls="personalBlogSection"
-          aria-pressed="false"
-        >
-          <span aria-hidden="true">•</span>
-          <span class="sr-only">Show personal blog in anthropic mode</span>
-        </button>
+      <section class="section section--card" id="notes">
+        <p class="section__eyebrow">Notes</p>
+        <h2>Shorter reflections, observations, and things worth remembering.</h2>
+        <div class="post-list post-list--notes" id="personalPosts"></div>
+      </section>
+
+      <section class="section section--card" id="garden">
+        <p class="section__eyebrow">Garden</p>
+        <h2>A few corners I want to keep cultivating.</h2>
+        <div class="garden-list">
+          <a href="#garden">Second brain</a>
+          <a href="#garden">Projects</a>
+          <a href="#garden">Books</a>
+          <a href="#garden">Words</a>
+          <a href="#garden">Failures</a>
+          <a href="#garden">Uses</a>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <p>benjohns.dev</p>
+        <p>Built to stay simple.</p>
       </footer>
     </main>
-
-    <div class="modal" id="technicalModal" hidden>
-      <div class="modal__backdrop" id="modalBackdrop"></div>
-      <div
-        class="modal__panel"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="technicalModalTitle"
-      >
-        <h3 id="technicalModalTitle">Add Technical Blog</h3>
-        <p class="muted">Title and body are required.</p>
-        <form id="technicalPostForm">
-          <label class="field">
-            <span>Title</span>
-            <input
-              id="technicalPostTitle"
-              name="title"
-              type="text"
-              maxlength="120"
-              required
-            />
-          </label>
-          <label class="field">
-            <span>Body</span>
-            <textarea
-              id="technicalPostBody"
-              name="body"
-              rows="7"
-              maxlength="4000"
-              required
-            ></textarea>
-          </label>
-          <div class="modal__actions">
-            <button
-              class="modal__btn modal__btn--ghost"
-              id="cancelTechnicalPost"
-              type="button"
-            >
-              Cancel
-            </button>
-            <button class="modal__btn modal__btn--primary" type="submit">
-              Publish
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
 
     <script type="module" src="./app.js"></script>
   </body>
