@@ -1,6 +1,6 @@
 # personal-website
 
-A simplified single-page personal site inspired by [anthonymorris.dev](https://anthonymorris.dev/) with a lighter, slightly playful palette.
+A simplified single-page personal site inspired by a secret famous dev with a lighter, slightly playful palette.
 
 ## Local run
 
